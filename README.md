@@ -39,6 +39,8 @@ Manage Jenkins -> Configure System
 * Leave remaining options as it is.
 ```
 
+![screenshot](https://raw.githubusercontent.com/vikramjakhr/ecs-jenkins-lib/master/jenkins-config.png)
+
 ## Running the tests
 
 Explain how to run the automated tests for this system
