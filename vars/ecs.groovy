@@ -1,9 +1,17 @@
-//
-//
-//
+/*
+ * ecs.groovy
+ * v1.0.0
+ * 2018-10-10
+ * Maintained and developed by @vikramjakhr
+ */
 
-// Deploy a task
-def deploy(cluster, service, region, task_family, image, boolean is_wait = true, String awscli = "aws") {
+
+/**
+ * Deploy a task to specified service on the ecs cluster with task_family and image.
+ * is_wait: True if you want to wait until changes reflects completely
+ * aws_cli: Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
+ */
+def deploy(cluster, service, task_family, image, region, boolean is_wait = true, String awscli = "aws") {
     sh """
 
         OLD_TASK_DEF=\$(${awscli} ecs describe-task-definition \
@@ -53,7 +61,10 @@ def deploy(cluster, service, region, task_family, image, boolean is_wait = true,
     """
 }
 
-// Restart ECS container
+/**
+ * Restart the specified service on the ecs cluster.
+ * aws_cli: Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
+ */
 def restart(cluster, service, region, String awscli = "aws") {
     sh """
         ${awscli} ecs update-service \
@@ -64,7 +75,10 @@ def restart(cluster, service, region, String awscli = "aws") {
     """
 }
 
-// Wait for changes to reflect
+/**
+ * Wait for the deployed ecs changes to start reflecting. (Tries every 15 seconds)
+ * aws_cli: Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
+ */
 def wait(cluster, service, region, String awscli = "aws") {
     sh """
         ${awscli} ecs wait services-stable \
