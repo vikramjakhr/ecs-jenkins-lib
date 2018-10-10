@@ -66,7 +66,7 @@ Pipeline example:
 stage('Deploy') {
     steps {
         script {
-            ecs.deploy("${env.CLUSTER_NAME}", "${env.SERVICE_NAME}", "${env.REGION}", "${env.TASK_FAMILY}", "${env.IMAGE_TO_DEPLOY}", true)
+            ecs.deploy("${env.CLUSTER_NAME}", "${env.SERVICE_NAME}", "${env.TASK_FAMILY}", "${env.IMAGE_TO_DEPLOY}", "${env.REGION}", true)
         }    
     }
 }
