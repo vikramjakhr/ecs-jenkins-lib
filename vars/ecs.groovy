@@ -5,11 +5,15 @@
  * Maintained and developed by @vikramjakhr
  */
 
-
 /**
  * Deploy a task to specified service on the ecs cluster with task_family and image.
- * is_wait: True if you want to wait until changes reflects completely
- * aws_cli: Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
+ * @param cluster : ECS cluster name
+ * @param service : ECS cluster service name
+ * @param task_family : Task family to update
+ * @param image : Image to deploy
+ * @param region : AWS region
+ * @param is_wait : True if you want to wait until changes reflects completely
+ * @param aws_cli : Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
  */
 def deploy(cluster, service, task_family, image, region, boolean is_wait = true, String awscli = "aws") {
     sh """
@@ -63,7 +67,10 @@ def deploy(cluster, service, task_family, image, region, boolean is_wait = true,
 
 /**
  * Restart the specified service on the ecs cluster.
- * aws_cli: Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
+ * @param cluster : ECS cluster name
+ * @param service : ECS cluster service name
+ * @param region : AWS region
+ * @param aws_cli : Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
  */
 def restart(cluster, service, region, String awscli = "aws") {
     sh """
@@ -77,7 +84,10 @@ def restart(cluster, service, region, String awscli = "aws") {
 
 /**
  * Wait for the deployed ecs changes to start reflecting. (Tries every 15 seconds)
- * aws_cli: Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
+ * @param cluster : ECS cluster name
+ * @param region : AWS region
+ * @param service : ECS cluster service name
+ * @param aws_cli : Pass the specific path (e.g. /usr/local/bin/aws) to aws cli. Default is aws.
  */
 def wait(cluster, service, region, String awscli = "aws") {
     sh """
